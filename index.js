@@ -31,8 +31,8 @@ async function run() {
     const todosCollection = client.db("todos").collection("todoslist")
 
 
-  //  create todos
-  // localhost:4000/addtodos
+  //  create todos 
+  // post ->  localhost:4000/addtodos
     app.post('/addtodos', async (req, res) => {
       
       const pd = req.body
@@ -52,6 +52,16 @@ async function run() {
 
       const todos = await todosCollection.find({}).toArray();
       res.send(todos)
+
+
+      app.delete('/todos/:id', async (req, res) => {
+        const id = req.params.id
+        
+        const q = { _id: (ObjectId(id)) }
+        console.log(id);
+        const result = await todosCollection.deleteOne(q)
+        res.send(result)
+      })
 
 
     })
