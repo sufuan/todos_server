@@ -32,6 +32,7 @@ async function run() {
 
 
   //  create todos
+  // localhost:4000/addtodos
     app.post('/addtodos', async (req, res) => {
       
       const pd = req.body
@@ -45,6 +46,15 @@ async function run() {
 
 
     //   read  
+    // localhost:4000/todos
+
+    app.get('/todos',async (req, res) => {
+
+      const todos = await todosCollection.find({}).toArray();
+      res.send(todos)
+
+
+    })
 
    
 
